@@ -7,6 +7,8 @@ class Game extends React.Component {
         this.state = {
             history: [{
                 squares: Array(9).fill(null),
+                x: 0,
+                y: 0,
             }],
             stepNumber: 0,
             xIsNext: true,
@@ -24,7 +26,9 @@ class Game extends React.Component {
         squares[i] = this.state.xIsNext ? '😈' : '👻';
         this.setState({
             history: history.concat([{
-                squares: squares
+                squares: squares,
+                x: Math.floor(i / 3),
+                y: i % 3,
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
@@ -41,13 +45,15 @@ class Game extends React.Component {
     render() {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
-        console.log(current)
         const winner = calculateWinner(current.squares);
         const moves = history.map((step, move) => {
-            const desc = move ? 'Go to move #' + move : 'To the start of the game';
+            const desc = move ? 
+                'Go to move #' + move : 
+                'To the start of the game';
+            const bold = this.state.stepNumber === move ? 'bold' : '';
             return (
                 <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                    <button onClick={() => this.jumpTo(move)} className={bold}>{desc}, coordinate - ({step.x + 1} : {step.y + 1})</button>
                 </li>
             )
         });
@@ -61,16 +67,16 @@ class Game extends React.Component {
     
         return (
         <div className="game">
-        <h1 className="head">Tic Toc Toe</h1>
+            <h1 className="head">Tic Toc Toe</h1>
             <div className="game-board">
                 <Board 
                     squares={current.squares}
                     onClick={(i) => this.handleClick(i)}
                 />
             </div>
-            <div className="game-info">
+        <div className="game-info">
             <div>{status}</div>
-            <ol>{moves}</ol>
+                <ol>{moves}</ol>
             </div>
         </div>
       );

@@ -3,6 +3,7 @@ body {
     padding: 30px;
     font: 14px "Century Gothic", Futura, sans-serif;
     margin: 20px;
+    background-color: rgb(192, 226, 240);
 }
   
 ol, ul {
@@ -43,7 +44,7 @@ ol, ul {
 }
   
 .game {
-   border: 0.5px solid gray;
+   /* border: 0.5px solid gray; */
    max-width: 800px;
    margin: 0px auto;
 }
@@ -56,14 +57,18 @@ h1 {
 } 
 
 .game-board {
+    margin-top: 70px;
     margin-left: 330px;
 }
 
 
 .game-info {
-    /* background-color: #5e5373; */
     font-size: 18px;    
     font-weight: 700;
     margin-left: 330px;
     margin-top: 20px;
+}
+
+.bold {
+    font-weight: bold;
 }
